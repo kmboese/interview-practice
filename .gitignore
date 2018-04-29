@@ -1,0 +1,10 @@
+#Directories
+
+#Executables
+main
+
+
+#Compilation files
+*.d
+*.o
+o
