@@ -12,7 +12,7 @@
 #include <string>
 #include <assert.h>
 
-#define UPPER_BOUND 10000 //largest number random generator will generate
+#define UPPER_BOUND 1000 //largest number random generator will generate
 #define ARRAY_SIZE 6
 #define ELEMENTS 4
 
@@ -44,7 +44,7 @@ int main(int argc, char **argv) {
 	testSingle();
 	testMultiple();
 	testLarge();
-	testRecursive();
+	//testRecursive();
 
 
 	/*
@@ -71,14 +71,14 @@ void testSingle() {
 void testMultiple() {
 	cout << "\nTesting 4-El-Sum with multiple solutions...\n" << divider;
 	int input[6] {1, 0, 5, 2, 0, 3};
-	int n = 6; //(1 + 0 + 5 + 0) && (1 + 0 + 2 + 3)
+	int n = 6; 
 	int solutions = fourElementSum(input, n, 6);
 	cout << "Found " << solutions << " solutions\n";
 	assert(solutions == 3);
 }
 
 void testLarge() {
-	int size = 100;
+	int size = UPPER_BOUND / 9;
 	//The average value is approx. (UPPER_BOUND / 2), so 4 of those
 	// added together should be a commonly found sum for four-element-sum.
 	int value = (UPPER_BOUND / 2) / 4;
