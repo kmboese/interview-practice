@@ -28,32 +28,32 @@ def printMatrix(matrix):
         print()
 
 # insert a row into a matrix, zero-indexed
-def insertRight(matrix, row, col, i, k):
-    for count in range(k):
-        matrix[row][count+col] = i
+def insertRight(matrix, top, left, right, i):
+    for index in range(left, right+1):
+        dPrint("index = {}".format(index))
+        matrix[top][index] = i
         i += 1
     return matrix, i
 
-def insertLeft(matrix, row, i, n, k):
-    for count in range(k):
-        # Insert at the given row in reverse order
-        matrix[row][(n-k)-count] = i
+def insertLeft(matrix, bottom, left, right, i):
+    # Insert at the given row in reverse order
+    for index in range(right, left-1, -1):
+        matrix[bottom][index] = i
         i += 1
     return matrix, i
 
-def insertDown(matrix, col, row, i, n, k, MAX_ROW):
-    for count in range(k):
-        matrix[MAX_ROW-k+count+1][col] = i
+def insertDown(matrix, right, top, bottom, i):
+    for index in range(top, bottom+1):
+        matrix[index][right] = i
         #print("DEBUG: i is {} in insertDown()".format(i))
         i += 1
     return matrix, i
 
-def insertUp(matrix, col, row, i, n, k, MAX_ROW):
-    for count in range(k):
-        # Insert at the given column in reverse order
-        dPrint("in insertUp(): n = {}, k = {}, count = {}".format\
-            (n, k, count))
-        matrix[(MAX_ROW-row)-count][col] = i
+def insertUp(matrix, left, top, bottom, i):
+    # Insert at the given column in reverse order
+    dPrint("bottom = {}, top+1 = {}".format(bottom, top+1))
+    for index in range(bottom, top-1, -1):
+        matrix[index][left] = i
         i += 1
     return matrix, i
 
@@ -67,25 +67,39 @@ def spiral(n):
     i = 1
     k = n
     upperBound = n*n
-    row = 0
-    col = 0
-    MAX_ROW = n-1
-    MAX_COL = n-1
+    top = 0
+    bottom = n-1
+    left = 0
+    right = n-1
+
+    # row = 0
+    # col = 0
+    # MAX_ROW = n-1
+    # MAX_COL = n-1
 
     while i <= upperBound:
-        matrix, i = insertRight(matrix, row, col, i, k)
-        dPrint("i is {} after insertRight()".format(i))
-        k -= 1
-        matrix, i = insertDown(matrix, MAX_COL-col, row, i, n, k, MAX_ROW)
-        matrix, i = insertLeft(matrix, MAX_ROW-row, i, n, k)
-        k -= 1
-        row += 1
-        matrix, i = insertUp(matrix, col, row, i, n, k, MAX_ROW)
-        #k -= 1
-        col += 1
-        #print("i is {} after insertDown()".format(i))
-        #insertLeft(matrix, MAX_row-row, i, k)
-        #print("i before the break is {}".format(i))
+        dPrint("Inserting right, i = {}".format(i))
+        matrix, i = insertRight(matrix, top, left, right, i)
+        top += 1
+#k -= 1
+        dPrint("Inserting down, i = {}".format(i))
+        matrix, i = insertDown(matrix, right, top, bottom, i)
+        right -= 1
+
+        dPrint("Inserting left, i = {}".format(i))
+        matrix, i = insertLeft(matrix, bottom, left, right, i)
+        bottom -= 1
+#k -= 1
+#row += 1
+        dPrint("Inserting up, i = {}".format(i))
+        matrix, i = insertUp(matrix, left, top, bottom, i)
+        left += 1
+        dPrint("End of loop, i = {}".format(i))
+#k -= 1
+#col += 1
+#print("i is {} after insertDown()".format(i))
+#insertLeft(matrix, MAX_row-row, i, k)
+#print("i before the break is {}".format(i))
 
 
     return matrix

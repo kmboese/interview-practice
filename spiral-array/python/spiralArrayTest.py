@@ -1,12 +1,14 @@
 from spiralArray import *
 
 def main():
-    print("Testing spiral-array(3)...")
-    matrix = spiral(3)
-    printMatrix(matrix)
-    print("\nTesting spiral-array(4)...")
-    matrix = spiral(4)
-    printMatrix(matrix)
+    lowerBound = 1
+    upperBound = 6
+    for i in range(lowerBound,upperBound):
+        print("Testing spiralArray({})...".format(i))
+        matrix = spiral(i)
+        printMatrix(matrix)
+        matrix.clear()
+
 
 if __name__ == "__main__":
     main()
