@@ -59,6 +59,10 @@ def insertUp(matrix, left, top, bottom, i):
 
 
 def spiral(n):
+    # Error handling
+    if (n <= 0):
+        print("Error in spiral(): n must be greater than zero.")
+        return []
     # Construct matrix
     matrix = [0]*n
     matrix = initMatrix(matrix, n)
@@ -67,21 +71,18 @@ def spiral(n):
     i = 1
     k = n
     upperBound = n*n
+
+    # Matrix boundaries
     top = 0
     bottom = n-1
     left = 0
     right = n-1
 
-    # row = 0
-    # col = 0
-    # MAX_ROW = n-1
-    # MAX_COL = n-1
-
     while i <= upperBound:
         dPrint("Inserting right, i = {}".format(i))
         matrix, i = insertRight(matrix, top, left, right, i)
         top += 1
-#k -= 1
+
         dPrint("Inserting down, i = {}".format(i))
         matrix, i = insertDown(matrix, right, top, bottom, i)
         right -= 1
@@ -89,17 +90,10 @@ def spiral(n):
         dPrint("Inserting left, i = {}".format(i))
         matrix, i = insertLeft(matrix, bottom, left, right, i)
         bottom -= 1
-#k -= 1
-#row += 1
+
         dPrint("Inserting up, i = {}".format(i))
         matrix, i = insertUp(matrix, left, top, bottom, i)
         left += 1
         dPrint("End of loop, i = {}".format(i))
-#k -= 1
-#col += 1
-#print("i is {} after insertDown()".format(i))
-#insertLeft(matrix, MAX_row-row, i, k)
-#print("i before the break is {}".format(i))
-
 
     return matrix

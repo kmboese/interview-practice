@@ -1,9 +1,9 @@
 from spiralArray import *
 
 def main():
-    lowerBound = 1
-    upperBound = 6
-    for i in range(lowerBound,upperBound):
+    lowerBound = 0
+    upperBound = 20
+    for i in range(lowerBound,upperBound+1):
         print("Testing spiralArray({})...".format(i))
         matrix = spiral(i)
         printMatrix(matrix)
