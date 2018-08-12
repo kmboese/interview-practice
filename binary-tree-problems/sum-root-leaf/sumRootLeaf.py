@@ -17,18 +17,21 @@ def isLeaf(node):
         return True
 
 def traverse(node, numString, total):
+    # Base case: return the total calculated from the root
     if not node:
         return total
+        
+    # Append the node value to the number string
     if numString:
         tmp = numString + str(node.val)
     else:
         tmp = str(node.val)
     dPrint("node value is {}, tmp is {}".format(node.val,tmp))
+
     # Add to sum if leaf node
     if isLeaf(node):
         total += int(tmp)
         dPrint("isLeaf(): total is {}, numString is {}".format(total,tmp))
-        #tmp = numString[:len(numString)-1]
         return total
     if node.left:
         #dPrint("Before traversal: total is {}".format(total))
