@@ -33,6 +33,7 @@ def traverse(node, numString, total):
         total += int(tmp)
         dPrint("isLeaf(): total is {}, numString is {}".format(total,tmp))
         return total
+    # Otherwise keep traversing
     if node.left:
         #dPrint("Before traversal: total is {}".format(total))
         total = traverse(node.left, tmp, total)
