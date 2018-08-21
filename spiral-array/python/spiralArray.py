@@ -45,7 +45,6 @@ def insertLeft(matrix, bottom, left, right, i):
 def insertDown(matrix, right, top, bottom, i):
     for index in range(top, bottom+1):
         matrix[index][right] = i
-        #print("DEBUG: i is {} in insertDown()".format(i))
         i += 1
     return matrix, i
 
