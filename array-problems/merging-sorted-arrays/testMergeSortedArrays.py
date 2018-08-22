@@ -5,7 +5,7 @@ divider = "\n__________________________________________________\n"
 
 def testBruteForceMerge():
     print("***** testBruteForceMerge() *****" + divider)
-    listNum = 5
+    listNum = 10
     listSize = 5
     lists = []
     sortedList = []

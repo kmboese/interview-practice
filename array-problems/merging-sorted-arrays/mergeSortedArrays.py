@@ -50,6 +50,8 @@ def bruteForceMerge(lists):
         #dPrint("Minimum element list index: {}".format\
             #(findMinElementIndex(lists, indices)))
     return sortedList
-
+# A more efficient method for merging sorted lists.
+# Process: initialize the minElements list with the first element of each list
+# and the list index of the element. Sort the min elements list
 def fastMerge(lists):
     return
