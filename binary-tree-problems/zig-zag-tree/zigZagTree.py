@@ -18,7 +18,13 @@ def getChildren(parent):
         children.append(parent.right)
         
     return children
-        
+    
+# Return a list of the values of the given nodes
+def getNodeValues(nodes):
+    values = []
+    for node in nodes:
+        values.append(node.val)
+    return values
     
 
 # Returns: a list of nodes of each level of a binary tree, in "zig-zag" order.
@@ -30,7 +36,12 @@ def getChildren(parent):
     # order to the zigZagNodes list
 def getZigZag(queue, zigZagNodes, reverse):
     children = []
+    childrenVals = []
     
+    # Special case: root node is appended to the list
+    if queue and not zigZagNodes:
+        zigZagNodes.append(getNodeValues(queue))
+
     # Base case: queue is empty
     if not queue:
         return zigZagNodes
@@ -49,22 +60,17 @@ def getZigZag(queue, zigZagNodes, reverse):
         return zigZagNodes
 
     # Reverse the children before adding them to the list if needed
-    if reverse:
+    if children and reverse:
         children = children[::-1]
         
-    # Add the children to the list
-    zigZagNodes.append(children)
+    # Add the children values to the list
+    childrenVals = getNodeValues(children)
+    zigZagNodes.append(childrenVals)
     
     # Alternate the reverse flag
     reverse = not reverse
     
     # Get the next level of children
     getZigZag(queue, zigZagNodes, reverse)
-        
-class Solution:
-    # @param A : root node of tree
-    # @return a list of list of integers
-    def zigzagLevelOrder(self, A):
-        zigZagNodes = []
-        zigZagNodes = getZigZag([A], zigZagNodes, False)
-        return(zigZagNodes)
+
+    return zigZagNodes
