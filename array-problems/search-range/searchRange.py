@@ -6,12 +6,13 @@ def dPrint(message):
     if DEBUG: print("DEBUG: {}".format(message))
 
 # Given a sorted list, finds the given element in O(log n) time.
-# Returns: the index of the first occurance of the key in the list
+# Returns: the midpoint of the first occurance of the key in the list
 # if it exists, or -1 otherwise 
 def binarySearch(nums, key):
     count = 1 # keep track of iterations
-    lookLeft = False
-    lookRight = False
+    first = 0
+    last = len(nums)-1
+    found = False
     # Check for invalid input
     if not nums or not key:
         dPrint("Looped {} times, didn't find the key".format(count))
@@ -20,64 +21,52 @@ def binarySearch(nums, key):
     if key < nums[0] or key > nums[len(nums)-1]:
         dPrint("Looped {} times, didn't find the key".format(count))
         return -1
-    # Initialize the search to be the middle of the list
-    index = len(nums) // 2
     # Initialize the partition to be half the list size
     partitionSize = len(nums) // 2 
 
-    while index >= 0 and index < len(nums):
+    while first<=last and not found:
+        midpoint = (first+last)//2
+
         # If we found the key, return it
-        if nums[index] == key:
+        if nums[midpoint] == key:
             dPrint("Looped {} times to find the key".format(count))
-            return index
-
-        # Cut the partition in half before searching again
-        if partitionSize != 1:
-            partitionSize = (partitionSize//2)
-
-        # If the index value is greater than the key, 
-        # look left
-        if nums[index] > key:
-            dPrint(str(nums[index]))
-            if partitionSize == 1:
-                lookLeft = True
-            index -= partitionSize
-
-        # Else if the index value is less than the key, look right
+            found = True
         else:
-            dPrint(str(nums[index]))
-            if partitionSize == 1:
-                lookRight = True
-            index += partitionSize
-
-        # If the partition size becomes 0, then we have stopped making
-        # progress and need to terminate the loop
-        if lookLeft and lookRight:
-            break
+            # Look in left half
+            if nums[midpoint] > key:
+                last = midpoint-1
+            # Look in right half
+            else:
+                first = midpoint+1
         count += 1
+
+    if found:
+        return midpoint
+    else:
+        return -1
     
     # If we exit the loop, we didn't find the key
     dPrint("Looped {} times, didn't find the key".format(count))
     return -1
 
 # Returns the leftmost occurrence of a key in a sorted list
-def scanLeft(nums, key, index):
+def scanLeft(nums, key, midpoint):
     # Check for invalid input
-    if nums[index] != key:
+    if nums[midpoint] != key:
         return None
 
-    while index >= 0 and nums[index] == key:
-        index -= 1
+    while midpoint >= 0 and nums[midpoint] == key:
+        midpoint -= 1
 
-    return index+1
+    return midpoint+1
 
 # Returns the rightmost occurrence of a key in a sorted list
-def scanRight(nums, key, index):
+def scanRight(nums, key, midpoint):
     # Check for invalid input
-    if nums[index] != key:
+    if nums[midpoint] != key:
         return None
 
-    while index < len(nums) and nums[index] == key:
-        index += 1
+    while midpoint < len(nums) and nums[midpoint] == key:
+        midpoint += 1
 
-    return index-1
+    return midpoint-1
