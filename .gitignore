@@ -3,8 +3,10 @@
 #Executables
 main
 
-
 #Compilation files
 *.d
 *.o
 o
+
+# Mac Files
+.DS_STORE
