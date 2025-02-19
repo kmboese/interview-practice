@@ -26,13 +26,26 @@ def get_compressed_string(input_string):
         return compressed_string
     else:
         return input_string
-        
+
+
+def run_tests():
+    pairs = [
+        ("aaaaaaaaaaaaaab", "a14b1"),
+        ("abcd", "abcd"),
+        ("abcdd", "abcdd"),
+        ("adddd", "a1d4"),
+        ("aabccccaaa", "a2b1c4a3")
+    ]
+    for pair in pairs:
+        result = get_compressed_string(pair[0])
+        print_result(pair[0], result)
+        assert(result == pair[1])
+
+def print_result(input_string, expected_string):
+    print(f'Input: "{input_string}", output: "{get_compressed_string(expected_string)}"')
 
 def main():
-    # test_string = "aabccccaaa"
-    test_string = "aaabb"
-    compressed_string = get_compressed_string(test_string)
-    print(f'Test string "{test_string}" compressed is "{compressed_string}"')
+    run_tests()
 
 if __name__ == '__main__':
     main()
