@@ -10,3 +10,10 @@ o
 
 # Mac Files
 .DS_STORE
+
+# VS Code
+.vscode/*
+
+#IntelliJ
+**/.idea/*
+*.iml
