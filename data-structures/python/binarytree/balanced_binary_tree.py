@@ -13,6 +13,47 @@ class Node:
 def is_leaf(node: Node):
     return not node.left and not node.right
 
+def pre_order_traversal(node: Node):
+    if not node:
+        return
+    print(node.value)
+    pre_order_traversal(node.left)
+    pre_order_traversal(node.right)
+
+def in_order_traversal(node: Node):
+    if not node:
+        return
+    in_order_traversal(node.left)
+    print(node.value)
+    in_order_traversal(node.right)
+
+def post_order_traversal(node: Node):
+    if not node:
+        return
+    post_order_traversal(node.left)
+    post_order_traversal(node.right)
+    print(node.value)
+
+def bfs_traversal(nodes_to_traverse: list[Node], all_nodes=None, depth=0):
+    if all_nodes is None:
+        all_nodes = []
+
+    if not nodes_to_traverse:
+        return
+
+    next_nodes = []
+    for node in nodes_to_traverse:
+        print(node)
+        if node.left:
+            next_nodes.append(node.left)
+        if node.right:
+            next_nodes.append(node.right)
+
+    if next_nodes:
+        return bfs_traversal(next_nodes, all_nodes, depth + 1)
+    else:
+        return all_nodes
+
 
 class BalancedBinaryTree:
     def __init__(self):
@@ -73,10 +114,8 @@ class BalancedBinaryTree:
                 next_nodes.append(node.right)
 
         if next_nodes:
-            debug(f'Recursing: depth={depth+1}, nodes_to_traverse={next_nodes}, all_nodes={all_nodes}')
             return self.traverse_balanced_in_order(depth + 1, next_nodes, all_nodes)
         else:
-            debug(f'Returning: all_nodes={all_nodes}')
             return all_nodes
 
     def print_balanced_in_order(self, depth=0, nodes=None):

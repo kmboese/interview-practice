@@ -27,7 +27,6 @@ class TestBinaryTree(TestCase):
 
     def test_insert_balanced(self):
         # Arrange
-
         #       1
         #   2       3
         # 4   5    6  7
